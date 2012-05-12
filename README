@@ -1,0 +1,8 @@
+Destiny JSON Server
+-----
+
+Destiny JSON Server is meant to be a lightweight system for json output only. It also allows for tracking of JSON Calls and complete control the command structure.
+
+API/Developer Information
+------
+All non-Destiny Code is required to be placed in the 'application/', where each subfolder is a naming convention.
