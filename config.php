@@ -24,3 +24,41 @@
 	 * File: config.php
 	 * Purpose: Main Configuration File.
 	 */
+	
+	// Main Configuation Information.
+	$config = array();
+	
+	// Router Settings.
+	// This is where you can set the approved pages for the router.
+	// This allows for all the content in the public directory to be called with clean URLs in Destiny.
+	//- NOTE Please do not set this to TRUE this unless you don't think your system is going to be compromised.
+	$config['router']['approved']['all'] = FALSE;
+	
+	$config['router']['approved'][] = 'main'; // NOTE: main is the alias for the root of the routing system.
+	
+	//$config['router']['approved'][] = 'signup'; // - This allows the router to accept /signup and then to include /public/signup.php
+	
+	// If you know you've been compromised and you want to completely disallow certain calls, use the denied array.
+	// This allows for all the content in the public directory to be denied access unless it appears in the approved array.
+	// - NOTE this is the ideal function, as it allows you to specifically allow certain files access.
+	$config['router']['denied']['all'] = TRUE;
+	
+	// $config['router']['denied'][] = 'signup'; // - This removed the ability to use signup.
+	
+	
+	
+	// Caching Settings
+	//$config['cache']['enabled'] = TRUE; // Cache is Enabled.
+	//$config['cache']['length'] = '8600'; // How far in the future does the cache last.
+	// -- Comment out the below lines and uncomment the lines above.
+	$config['cache']['enabled'] = FALSE; // Cache is Disabled.
+	
+	
+	
+	
+	
+	
+	
+
+	// After This Point, PLEASE do not edit. This is meant to allow simple array creation
+	return (array) $config;
