@@ -34,9 +34,6 @@ defined('APP_PATH') || define('APP_PATH', realpath(dirname(__FILE__) . '/../appl
 // Defining the ERR_LOG for the system.
 defined('ERR_LOG') || define('ERR_LOG', realpath(dirname(__FILE__) . '/../data/logs') . '/error.log');
 
-// Defining the INTER_DB for the system.
-defined('INTER_DB') || define('INTER_DB', realpath(dirname(__FILE__) . '/../data/db') . '/destiny.db');
-
 // Setup the include path.
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APP_PATH . '/../library'),

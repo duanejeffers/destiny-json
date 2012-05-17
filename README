@@ -1,24 +1,15 @@
 Destiny JSON Server
 -----
 
-Destiny JSON Server is meant to be a lightweight system for json output only. It also allows for tracking of JSON Calls and complete control the command structure.
+Destiny JSON Server is meant to be a lightweight system for json output only. It also allows for tracking of JSON Calls and complete control of the command structure.
 
 Destiny is only meant to be a interaction engine. Meaning, it provides all the appropriate APIs for you as the developer.
 
 Features
 ------
 - Simple JSON generation
-- Admin interface
 - Aggressive Caching available.
 - Simple Page Handling
-
-Usage
-------
-Each url action is mapped to a class, where the output from the class is then the returned json.
-
-Admin Interface
-------
-Destiny includes an admin interface located at <root_url>/admin
 
 Simple Page Handling
 ------
@@ -26,11 +17,20 @@ Destiny JSON includes the Destiny_Index object that can load in a simple page. T
 
 API/Developer Information
 ------
-All non-Destiny Code is required to be placed in the 'application/', where each subfolder/subfile is the actual class that is called. As long as the called object extends/is an instance of one of the following, Destiny_Db_MySQL, Destiny_Db_SQLite, Destiny_Db_Internal, then you can run the object.
+All non-Destiny Code is required to be placed in the 'application/', where each subfolder/subfile is the actual class that is called. As long as the called object extends/is an instance of one of the following: Destiny_Db_PDO, then you can run the object.
 
 Notes
 -------
 The JSON Server is only meant for quick real-time communication. There is an included index class that is essentially the way to get a simple PHP file for static HTML/Javascript. It allows that output to the web browsers.
+
+To-Do
+-------
+As of right now, the system is not feature complete.
+For Version 0.1:
+- Basic routing and error handling.
+- Caching
+- Support for other Database Types. (Right now, only using PDO. Ideal Support for MongoDB/CouchDB/Cassandra is up and coming)
+
 
 Copyright
 -------

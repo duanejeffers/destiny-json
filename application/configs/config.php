@@ -53,7 +53,10 @@
 	// -- Comment out the below lines and uncomment the lines above.
 	$config['cache']['enabled'] = FALSE; // Cache is Disabled.
 	
-	
+	// Database Settings
+	// The Database settings are meant to be PDO database settings.
+	//$config['db']['adapter'] = 'PDO';
+	//$config['db']['connect'] = ''; // This is the connect string for PDO.
 	
 	
 	
