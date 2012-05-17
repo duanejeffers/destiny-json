@@ -37,7 +37,7 @@ class Destiny_Router
 	
 	public function __construct()
 	{
-		// First thing's first. - We check to see if the route is in the database.
+		// First thing's first. - We check to see 
 		
 	}
 }

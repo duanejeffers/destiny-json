@@ -34,16 +34,24 @@
 	//- NOTE Please do not set this to TRUE this unless you don't think your system is going to be compromised.
 	$config['router']['approved']['all'] = FALSE;
 	
-	$config['router']['approved'][] = 'main'; // NOTE: main is the alias for the root of the routing system.
+	$config['router']['approved'][] = '/main'; // NOTE: main is the alias for the root of the routing system.
 	
-	//$config['router']['approved'][] = 'signup'; // - This allows the router to accept /signup and then to include /public/signup.php
+	//$config['router']['approved'][] = '/signup'; // - This allows the router to accept /signup and then to include /public/signup.php
+	
+	/* You can also setup routes for the internal system as an alias. It requires the following:
+	$config['router']['approved'][] = '/api/version';
+	$config['router']['alias']['/api/version']['class'] = 'Application_Version';
+	$config['router']['alias']['/api/version']['method'] = 'versionNum';
+	
+	Please NOTE: It is always better to 
+	*/
 	
 	// If you know you've been compromised and you want to completely disallow certain calls, use the denied array.
 	// This allows for all the content in the public directory to be denied access unless it appears in the approved array.
 	// - NOTE this is the ideal function, as it allows you to specifically allow certain files access.
 	$config['router']['denied']['all'] = TRUE;
 	
-	// $config['router']['denied'][] = 'signup'; // - This removed the ability to use signup.
+	// $config['router']['denied'][] = 's/ignup'; // - This removed the ability to use signup.
 	
 	
 	
