@@ -21,40 +21,44 @@
 	 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 	 * IN THE SOFTWARE.
 	 *
-	 * File: library/Destiny/Router.php
-	 * Purpose: The Router class for deciding if the route over rides the class call.
+	 * File: library/Destiny/Header.php
+	 * Purpose: The Header object is for calling header related items.
 	 */
 
-class Destiny_Router
+class Destiny_Header
 {
-	protected $_class;
-	protected $_method;
-	protected $_url;
-	protected $_namespace;
-	protected $_req;
-	
-	// parse() splices the url and determines the Called Object and Method.
-	protected function parse()
+	public static function call404($errMsg = NULL, $errCode = NULL, $errClass = NULL)
 	{
+		$arg = func_get_args();
 		
-	}
-	
-	public function getRender()
-	{
-		
-	}
-	
-	/** the construct
-	 * @param Destiny_Request $req The Destiny_Request Object.
-	 */
-	public function __construct(Destiny_Request $req)
-	{
-		// First thing's first. - We check to see if there is anything to route.
-		if(!($req instanceof Destiny_Request))
+		$err_message = '';
+		foreach($arg as $id => $val)
 		{
-			Destiny_Header::call404('Invalid Request Item', 500, __CLASS__);
+			if(!is_null($val))
+			{
+				switch($id)
+				{
+					case  0:
+						$err_message .= 'Error Message';
+						break;
+					
+					case 1:
+						$err_message .= 'Error Code';
+						break;
+					
+					case 2:
+						$err_message .= 'Calling Class';
+						break;
+				}
+				$err_message .= ' :' . $val;
+			}
+			$err_message .= "<br />\n";
 		}
-		$this->_req = $req;
 		
+		header("HTTP/1.0 404 Not Found");
+		echo '<h1>Error Getting Method.</h1><br />' . "\n\n";
+		echo $err_message;
+		echo "Destiny v" . DEST_VER;
+		die();
 	}
 }

@@ -31,10 +31,10 @@ class Destiny_Request
 	protected $_post;
 	protected $_get;
 	protected $_request;
-	protected $_map = array();
+	//protected $_map = array();
 	
-	/* map_query
-	  This function splices apart the query to determine the appropriate class to call. */ 
+	/* map_query - Deprecating?
+	  This function splices apart the query to determine the appropriate class to call.
 	private function map_query()
 	{
 		$q = $this->_get['q']; 
@@ -50,6 +50,7 @@ class Destiny_Request
 			$this->_map['q_prop']['method'] = 'throw404';
 		}
 	}
+	*/
 	
 	public function __construct()
 	{
@@ -61,12 +62,22 @@ class Destiny_Request
 		
 		// Next map the q request variable.
 		
-		$this->map_query();
+		//$this->map_query();
 		return $this;
 	}
 	
 	public function __get($name)
 	{
-		
+		switch($name)
+		{
+			case 'post':
+				return $this->_post;
+			
+			case 'get':
+				return $this->_get;
+			
+			case 'request':
+				return $this->_request;
+		}
 	}
 }

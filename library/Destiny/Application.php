@@ -25,6 +25,8 @@
 	 * Purpose: The main output of the application.
 	 * Features: It's own autoloader.
 	 */
+	
+defined(DEST_VER) || define("DEST_VER", "v0.1");
 
 class Destiny_Application
 {
@@ -56,12 +58,12 @@ class Destiny_Application
 		// Load the Config.
 		$config = new Destiny_Config($cfg);
 		
-		$config->addRegistry(array('request' => 'Destiny_Request'), 0);
-		$config->addRegistry(array('router' => 'Destiny_Router'), 1);
+		//$config->addRegistry(array('request' => 'Destiny_Request'), 0);
+		//$config->addRegistry(array('router' => 'Destiny_Router'), 1);
 		
-		// Register the Registry.
-		Destiny_Registry::set('config', $config); // Set the config first, for the including registry items.
-		Destiny_Registry::init($config->registry);
+		// Register the Registry. - Remove the registry??
+		//Destiny_Registry::set('config', $config); // Set the config first, for the including registry items.
+		//Destiny_Registry::init($config->registry);
 		
 		return $this;
 	}
@@ -71,6 +73,6 @@ class Destiny_Application
 	public function run()
 	{
 		// First things first, we need to check the request to see if it's a routed obj or called.
-		$route = Destiny_Registry::get('router');
+		//$route = Destiny_Registry::get('router');
 	}
 }
