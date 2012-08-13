@@ -40,14 +40,51 @@ class Destiny_Json
 			case JSON_ERROR_NONE:
 				return;
 			
+			case JSON_ERROR_DEPTH:
+				throw Exception('JSON Decoding Error: The Maximum Stack Depth has been exceeded.');
+				break;
 			
+			case JSON_ERROR_STATE_MISMATCH:
+				throw Exception('JSON Decoding Error: Malformed JSON.');
+				break;
+			
+			case JSON_ERROR_CTRL_CHAR:
+				throw Exception('JSON Decoding Error: Control character error, possibly incorrectly encoded.');
+				break;
+			
+			case JSON_ERROR_SYNTAX:
+				throw Exception('JSON Decoding Error: Syntax Error.');
+				break;
+			/* //- FOR php 5.3.3 and above. commented out for 5.2 usability.
+			case JSON_ERROR_UTF8:
+				throw Exception('JSON Encoding Error: Not UTF8');
+				break;
+			*/ 
+			default:
+				break;
 		}
+		
+		return;
 	}
 	
 	public function addJSON($json)
 	{
 		$this->_json .= $json . "\n";
 		
+		return $this;
+	}
+	
+	// setArray sets the base json output variable to an array for output to json.
+	public function setArray($array)
+	{
+		$this->_data = $array;
+		return $this;
+	}
+	
+	// setObject sets the base json output variable to an object for output to json.
+	public function setObject($object)
+	{
+		$this->_data = $object;
 		return $this;
 	}
 	
