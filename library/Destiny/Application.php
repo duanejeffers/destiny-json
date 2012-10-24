@@ -65,6 +65,8 @@ class Destiny_Application
 		//Destiny_Registry::set('config', $config); // Set the config first, for the including registry items.
 		//Destiny_Registry::init($config->registry);
 		
+		
+		
 		return $this;
 	}
 	
