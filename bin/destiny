@@ -1,4 +1,5 @@
-#!/usr/local/bin/php
+#!/usr/bin/php
+
 <?php
 	/**
 	 * Destiny JSON Server
@@ -27,17 +28,17 @@
 	 */
 	
 	// including cli.class.php for subsequent scripts and errors
-	include_once (realpath(__FILE__) . '/inc/cli.class.php');
-	include_once (realpath(__FILE__) . '/inc/cli.func.php');
+	include_once ('inc/cli.class.php');
+	include_once ('inc/cli.func.php');
 	
 	// Read in the json file of available commands.
-	$commands = read_jsonfile(realpath(__FILE__) . '/scripts/available.json', TRUE);
+	$commands = read_jsonfile(substr(realpath(__FILE__), 0, (strlen('destiny') * -1)) . '/scripts/available.json', TRUE);
 	
 	// First arg from the commandline is the include script.
 	if(array_key_exists($argv[1], $commands)):
 		include (realpath(__FILE__) . '/scripts/' . $argv[1] . '.php');
 	else: // Did not specify a file.
-		$cli = new cli();
+		$cli = new cli(array());
 		$cli->print_line('Welcome to the Destiny Server CLI Tools');
 		$cli->print_line('Everything here is to help you with setting up and testing your Destiny install.');
 		$cli->print_line(NULL);
@@ -51,14 +52,14 @@
 		
 		$total_pad = $cmd_len + $desc_len + 2;
 		
-		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		$cli->print_line('+-' . str_pad('', $cmd_len, '-') . '-+-' . str_pad('', $desc_len, '-') . '-+');
 		$cli->print_line('| ' . str_pad('Available Commands', ($total_pad + 1), " ", STR_PAD_BOTH) . ' |');
-		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		$cli->print_line('+-' . str_pad('', $cmd_len, '-') . '-+-' . str_pad('', $desc_len, '-') . '-+');
 		
 		foreach($commands as $cmd => $desc):
 			$cli->print_line('| ' . cli::color_str(str_pad($cmd, $cmd_len), cli::ColorFgLtGreen) . ' | ' . cli::color_str(str_pad($desc, $desc_len), cli::ColorFgLtPurple) . ' |');
 		endforeach;
 		
-		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		$cli->print_line('+-' . str_pad('', $cmd_len, '-') . '-+-' . str_pad('', $desc_len, '-') . '-+');
 		
 	endif;

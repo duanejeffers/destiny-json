@@ -31,7 +31,7 @@
 	 * @param bool $array Returns an Array instead of a stdObject.
 	 * @return mixed The decoded json object/array.
 	 */
-	function read_jsonfile($filename = FALSE) {
+	function read_jsonfile($filename, $array = FALSE) {
 		$json = file_get_contents($filename);
-		return json_decode($json, $filename);
+		return json_decode($json, $array);
 	}
