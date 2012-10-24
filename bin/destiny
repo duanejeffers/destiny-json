@@ -1,0 +1,64 @@
+#!/usr/local/bin/php
+<?php
+	/**
+	 * Destiny JSON Server
+	 * Written By Duane Jeffers <duane@duanejeffers.com>
+	 * Copyright (c) 2012 Duane Jeffers
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is furnished
+	 * to do so, subject to the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+	 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+	 * IN THE SOFTWARE.
+	 *
+	 * File: bin/destiny
+	 * Purpose: Commandline script to call additional function scripts.
+	 */
+	
+	// including cli.class.php for subsequent scripts and errors
+	include_once (realpath(__FILE__) . '/inc/cli.class.php');
+	include_once (realpath(__FILE__) . '/inc/cli.func.php');
+	
+	// Read in the json file of available commands.
+	$commands = read_jsonfile(realpath(__FILE__) . '/scripts/available.json', TRUE);
+	
+	// First arg from the commandline is the include script.
+	if(array_key_exists($argv[1], $commands)):
+		include (realpath(__FILE__) . '/scripts/' . $argv[1] . '.php');
+	else: // Did not specify a file.
+		$cli = new cli();
+		$cli->print_line('Welcome to the Destiny Server CLI Tools');
+		$cli->print_line('Everything here is to help you with setting up and testing your Destiny install.');
+		$cli->print_line(NULL);
+		$cli->print_line('By Running ' . cli::color_str('destiny', cli::ColorFgLtRed) . ' ' . cli::color_str('<command>/<subcommand>', cli::ColorFgLtGreen));
+		$cli->print_line("You'll be up and running in no time.");
+		$cli->print_line(NULL);
+		
+		// Output the list of available commands.
+		$cmd_len = max(array_map('strlen', array_keys($commands)));
+		$desc_len = max(array_map('strlen', array_values($commands)));
+		
+		$total_pad = $cmd_len + $desc_len + 2;
+		
+		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		$cli->print_line('| ' . str_pad('Available Commands', ($total_pad + 1), " ", STR_PAD_BOTH) . ' |');
+		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		
+		foreach($commands as $cmd => $desc):
+			$cli->print_line('| ' . cli::color_str(str_pad($cmd, $cmd_len), cli::ColorFgLtGreen) . ' | ' . cli::color_str(str_pad($desc, $desc_len), cli::ColorFgLtPurple) . ' |');
+		endforeach;
+		
+		$cli->print_line('+-' . str_pad('', floor($total_pad/2), '-') . '+' . str_pad('', floor($total_pad/2), '-') . '-+');
+		
+	endif;
