@@ -1,4 +1,29 @@
 {
-	"view/json": "View a JSON Encoded String, with additional runtime output. (Developer)",
-	"create/controller": "Create a Destiny Controller (Developer)"
+	"install": {
+		"_desc":"Sets up the appropriate project structure for Destiny.",
+		"_tags":[
+			"developer",
+			"server"
+		]
+	},
+	"install/db": {
+		"_desc":"Helps Setup Database Drivers and saves multiple instances of the dbAdapter",
+		"_tags":[
+			"developer",
+			"server",
+			"data"
+		]
+	},
+	"view/json": {
+		"_desc":"View a JSON Encoded String, with additional runtime output.",
+		"_tags":[
+			"developer"
+		]
+	},
+	"create/controller": {
+		"_desc":"Create a Destiny Controller",
+		"_tags":[
+			"developer"
+		]
+	}
 }
